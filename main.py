@@ -65,14 +65,12 @@ def handle_client(conn, addr):
             recieved = binascii.hexlify(data)
             record = decodethis(recieved)
             conn.send(record)
-            break
 
         except socket.error:
             print("Error Occured.")
             break
 
     conn.close()
-    print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
 
 ### Start the server
 def start():
