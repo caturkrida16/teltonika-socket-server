@@ -11,6 +11,7 @@ import threading
 import binascii
 
 ## PIP
+from twos_complement import twos_complement
 
 ### >>><<< ###
 # Intialization
@@ -36,6 +37,9 @@ def decodethis(data):
         satellites = int(data[62:64], 16)
         speed = int(data[64:68], 16)
         
+        longitude = loc_convert(longitude)
+        latitude = loc_convert(latitude)
+        
         print("Length: " + str(length))
         print("Record: " + str(record))
         print("Timestamp: " + str(timestamp))
@@ -49,6 +53,19 @@ def decodethis(data):
         print("")
 
         return record.to_bytes(4, 'big')
+
+### Location converter
+def loc_convert(loc):
+    loc_int = float(loc)
+    loc_bin = bin(loc).replace("0b", "")
+    if (loc_bin[0:1] == 0):
+        loc_int = loc_int / 10000000
+        return loc_int
+        
+    if (loc_bin[0:1] == 1):
+        loc_bin = twos_complement(loc_bin))
+        loc_int = float(int(loc_bin, 2)) / 10000000
+        return loc_int
 
 ### Handle the Client
 def handle_client(conn, addr):
@@ -75,7 +92,7 @@ def handle_client(conn, addr):
 ### Start the server
 def start():
     s.listen()
-    print(" Server is listening ...")
+    print("Server is listening ...")
 
     while True:
         conn, addr = s.accept()
