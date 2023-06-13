@@ -63,7 +63,7 @@ def loc_convert(loc):
         return loc_int
         
     if (loc_bin[0:1] == 1):
-        loc_bin = twos_complement(loc_bin))
+        loc_bin = twos_complement(loc_bin)
         loc_int = float(int(loc_bin, 2)) / 10000000
         return loc_int
 
