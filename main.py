@@ -56,16 +56,17 @@ def decodethis(data):
 
 ### Location converter
 def loc_convert(loc):
-    loc_int = float(loc)
     loc_bin = bin(loc).replace("0b", "")
-    if (loc_bin[0:1] == 0):
-        loc_int = loc_int / 10000000
+    check = 2 ** 31
+    
+    if (loc < check):
+        loc_int = float(loc) / 10000000
         return loc_int
         
-    if (loc_bin[0:1] == 1):
+    else if (loc > check):
         loc_bin = twos_complement(loc_bin)
         loc_int = float(int(loc_bin, 2)) / 10000000
-        return loc_int
+        return loc_int * -1
 
 ### Handle the Client
 def handle_client(conn, addr):
