@@ -1,2 +1,2 @@
 # socket-python
-Socket server for accept data from GPS Device.
+Socket server for accept data from Teltonika GPS device.
