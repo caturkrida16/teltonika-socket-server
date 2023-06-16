@@ -1,0 +1,35 @@
+# Example Data
+00 00 00 00 = Zero Bytes
+00 00 02 4c = Data Field Length
+08 = Codec
+09 = Record 1
+00 00 01 88 2c ee 69 1a = Timestamp
+00 = Priority
+00 00 00 00 = Longitude
+00 00 00 00 = Latitude
+00 00 = Altitude
+00 00 = Angle
+00 = Satellites
+00 00 = Speed
+00 = Event IO ID
+f0 = N of Total ID
+0c = N1 of One Byte IO
+05 = 1st IO ID (GSM Signal)
+ef = 1st IO Value   
+01 = 2nd IO ID (DIN1)
+f0 = 2nd IO VAlue
+01 = N2 of Two Bytes IO 
+15 = 1st IO ID (External Voltage)
+05 c8 = 1st IO Value
+00 = N4 of Four Bytes IO
+45 = 1st IO ID (Active GSM Operator)
+02 05 b5 00 = 1st IO Value
+00 = N8 of Eight Bytes IO
+b6 = 1st IO ID (iButton)
+00 00 42 2e 3b 43 0f a0 = 1st IO Value
+44 = Record 2 (Total Record)
+00 8b 02 f1 = (CRC-16)
+
+# Notes
+1. Longitude and Latitude divide 10.000.000
+2. If integer value is more than 2147483647. Do the 2's complement and multiply with -1.
