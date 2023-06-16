@@ -60,12 +60,12 @@ def loc_convert(loc):
     check = 2 ** 31
     
     if (loc < check):
-        loc_int = float(loc) / 10000000
+        loc_int = float(loc) / 10 ** 7
         return loc_int
         
     else if (loc > check):
         loc_bin = twos_complement(loc_bin)
-        loc_int = float(int(loc_bin, 2)) / 10000000
+        loc_int = float(int(loc_bin, 2)) / 10 ** 7
         return loc_int * -1
 
 ### Handle the Client
