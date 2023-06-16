@@ -23,6 +23,7 @@ PORT = 9797
 ## Function
 ### Decode the Data
 def decodethis(data):
+    # Get the Codec Data
     codec = int(data[16:18], 16)
     
     if (codec == 8):
@@ -37,6 +38,7 @@ def decodethis(data):
         satellites = int(data[62:64], 16)
         speed = int(data[64:68], 16)
         
+        # Convert the Integer Location to Longitude and Latitude format
         longitude = loc_convert(longitude)
         latitude = loc_convert(latitude)
         
@@ -52,21 +54,29 @@ def decodethis(data):
         print("Speed: " + str(speed))
         print("")
 
+        # You need to send the record data back in total 4 bytes
         return record.to_bytes(4, 'big')
 
 ### Location converter
 def loc_convert(loc):
-    loc_bin = bin(loc).replace("0b", "")
+    # Get the max data integer in 31 bit.
     check = 2 ** 31
     
+    # 10 ** 7 or 10e7 is from Teltonika website
+    # If data not bigger than 2e31, just divide with 10e7
+    # Than if data bigger than 2e31, convert location to binary and do 2's complement. After that divide with 10e7 and multiply with -1
     if (loc < check):
         loc_int = float(loc) / 10 ** 7
         return loc_int
         
-    else if (loc > check):
+    elif (loc > check):
+        loc_bin = bin(loc).replace("0b", "")
         loc_bin = twos_complement(loc_bin)
         loc_int = float(int(loc_bin, 2)) / 10 ** 7
         return loc_int * -1
+    
+    elif (loc == 0):
+        return "0"
 
 ### Handle the Client
 def handle_client(conn, addr):
