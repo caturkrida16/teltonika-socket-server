@@ -31,5 +31,5 @@ b6 = 1st IO ID (iButton)
 00 8b 02 f1 = (CRC-16)
 
 # Notes
-1. Longitude and Latitude divide 10.000.000
-2. If integer value is more than 2147483647. Do the 2's complement and multiply with -1.
+1. Longitude and Latitude divide 10000000 (10e7)
+2. If integer value is more than 2147483647 (2e31). Do the 2's complement and multiply with -1.
