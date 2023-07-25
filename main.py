@@ -82,7 +82,7 @@ def loc_convert(loc):
 def handle_client(conn, addr):
     print(f"[NEW CONNECTION] {addr} connected.")
     connected = True
-    imei = conn.recv(1024)
+    imei = conn.recv(1280)
     print("IMEI: " + imei.decode())
     message = '\x01'
     message = message.encode('utf-8')
@@ -90,7 +90,7 @@ def handle_client(conn, addr):
     
     while connected:
         try:
-            data = conn.recv(1024)
+            data = conn.recv(1280)
             recieved = binascii.hexlify(data)
             record = decodethis(recieved)
             conn.send(record)
