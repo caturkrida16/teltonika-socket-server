@@ -83,6 +83,7 @@ def handle_client(conn, addr):
     print(f"[NEW CONNECTION] {addr} connected.")
     connected = True
     imei = conn.recv(1024)
+    print("IMEI: " + imei.decode())
     message = '\x01'
     message = message.encode('utf-8')
     conn.send(message)
